@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  </head>
+  <script type="text/javascript">
+    function kirim() {
+      namax = document.getElementById("nama").value;
+      emailx = document.getElementById("email").value;
+      alamatx = document.getElementById("alamat").value;
+      pekerjaanx = document.getElementById("pekerjaan").value;
+      if (namax == "") {
+        alert("nama harus diisi");
+      } else if (emailx == "") {
+        alert("email harus diisi");
+      } else if (alamatx == "") {
+        alert("alamat harus diisi");
+      } else if (pekerjaanx == "") {
+        alert("pekerjaan harus diisi");
+        G.JavaScript;
+      } else {
+        alert(
+          "Nama : " +
+            namax +
+            "\n" +
+            "Email : " +
+            emailx +
+            "\n" +
+            "Alamat : " +
+            alamatx +
+            "\n" +
+            "Pekerjaan : " +
+            pekerjaanx +
+            "\n"
+        );
+      }
+    }
+  </script>
+  <body>
+    <div data-role="page" id="page1">
+        <div data-role="header" id="myheader">
+            <h1 class="titlehome">home</h1>
+        </div>
+        <div data-role="main" class="ui-content">
+            <form action="">
+            <div class="ui-field-contain">
+                <label>Nama:</label>
+                <input type="text" id="nama"></input>
+            </div>
+            <div class="ui-field-contain">
+                <label>Email:</label>
+                <input type="email" id="email"></input>
+            </div>
+            <div class="ui-field-contain">
+                <label>Alamat:</label>
+                <textarea id="alamat"></textarea>
+            </div>
+            <div class="ui-field-contain">
+                <label>Pekerjaan:</label>
+                <select id="pekerjaan">
+                    <option value="">--pilih pekerjaan--</option>
+                    <option value="SWASTA">SWASTA</option>
+                    <option value="PNS">PNS</option>
+                    <option value="TNI/Polri">TNI/Polri</option>
+                    <option value="WIRASWASTA">WIRASWASTA</option>
+                    <option value="LAINNYA">LAINNYA</option>
+                  </select>
+            </div>
+            <input type="submit" name="submit" data-inline="true" value="submit" onclick="kirim()" />
+            </form>
+        </div>
+        <div data-role="footer">
+            <h1>footer text</h1>
+        </div>
+    </div>
+  </body>
+</html>

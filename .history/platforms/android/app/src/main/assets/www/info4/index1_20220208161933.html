@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="">
+      <input type="button" name="test" value="Click me" onclick="inform()" />
+    </form>
+
+    <h1 id="myHeader" onclick="getElement()">
+      Klik saya untuk lihat nama tag saya
+    </h1>
+
+    <h1 id="kepala">Selamat Datang user!!</h1>
+    <input type="button" onclick="lihatisi()" value="Lihat isi H1" />
+    <input type="button" onclick="tukarisi()" value="Tukar isi H1" />
+
+    <input type="text" name="teks" id="teks" />
+    <input type="button" onclick="lihatisi()" value="Lihat" />
+    <input type="button" onclick="tukarisi()" value="Tukar" />
+
+    <script type="text/javascript">
+      var nilai = 80;
+      if (nilai >= 85) {
+        alert("A");
+      } else if (nilai >= 70 && nilai < 85) {
+        alert("B");
+      } else if (nilai >= 60 && nilai < 70) {
+        alert("C");
+      } else {
+        alert("D");
+      }
+
+      //function
+      function kalikan(x, y) {
+        z = x * y;
+        alert("Hasil kali " + x + " * " + y + " = " + z);
+      }
+      kalikan(5, 3);
+
+      //onclick function
+      function inform() {
+        alert("cao ni ma");
+      }
+
+      var message = "Welcome to our site!";
+      var format = message.toUpperCase();
+      var size = 1;
+      for (i = 0; i < message.length; i++) {
+        document.write(format.charAt(i).fontsize(size).bold());
+        if (size < 7) {
+          size++;
+        } else {
+          size = 1;
+        }
+      }
+
+      //manipulasi object html, document.getElementById(”id_objek”), document.getElementsByName(“nama_objek”)
+      function getElement() {
+        var x = document.getElementById("myHeader");
+        alert("Ini adalah elemen " + x.tagName);
+      }
+
+      //innerHtml = mendapat isi teks / html suatu tag html
+      function lihatisi() {
+        isi = document.getElementById("kepala").innerHTML;
+        alert(isi);
+      }
+      function tukarisi() {
+        document.getElementById("kepala").innerHTML = "Tulisan Ini diganti";
+      }
+
+      //value, mengambil / memanipulasi nilai input form
+      function lihatisi() {
+        isi = document.getElementById("teks").value;
+        alert(isi);
+      }
+      function tukarisi() {
+        document.getElementById("teks").value = "Tulisan Ini diganti";
+      }
+    </script>
+  </body>
+</html>
