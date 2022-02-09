@@ -1,0 +1,62 @@
+{
+    "sourceFile": "www/info8/audio.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 11,
+            "patches": [
+                {
+                    "date": 1644417014487,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1644417024042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n <head>\r\n     <meta charset=\"UTF-8\">\r\n     <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n+    <script src=\"../cordova.js\"></script>\r\n     <title>Document</title>\r\n </head>\r\n <body>\r\n     \r\n"
+                },
+                {
+                    "date": 1644417034119,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,7 @@\n <!DOCTYPE html>\r\n <html lang=\"en\">\r\n <head>\r\n-    <meta charset=\"UTF-8\">\r\n-    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n     <script src=\"../cordova.js\"></script>\r\n     <title>Document</title>\r\n </head>\r\n"
+                },
+                {
+                    "date": 1644417040490,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n <html lang=\"en\">\r\n <head>\r\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n     <script src=\"../cordova.js\"></script>\r\n-    <title>Document</title>\r\n+    <title>Audio</title>\r\n </head>\r\n <body>\r\n     \r\n </body>\r\n"
+                },
+                {
+                    "date": 1644417051102,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,14 @@\n <head>\r\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n     <script src=\"../cordova.js\"></script>\r\n     <title>Audio</title>\r\n+    <link\r\n+      rel=\"stylesheet\"\r\n+      href=\"https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css\"\r\n+    />\r\n+    <script src=\"https://code.jquery.com/jquery-1.11.1.min.js\"></script>\r\n+    <script src=\"https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js\"></script>\r\n </head>\r\n <body>\r\n     \r\n </body>\r\n"
+                },
+                {
+                    "date": 1644417095346,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,17 +1,67 @@\n <!DOCTYPE html>\r\n <html lang=\"en\">\r\n+\r\n <head>\r\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n     <script src=\"../cordova.js\"></script>\r\n     <title>Audio</title>\r\n-    <link\r\n-      rel=\"stylesheet\"\r\n-      href=\"https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css\"\r\n-    />\r\n+    <link rel=\"stylesheet\" href=\"https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css\" />\r\n     <script src=\"https://code.jquery.com/jquery-1.11.1.min.js\"></script>\r\n     <script src=\"https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js\"></script>\r\n </head>\r\n+\r\n <body>\r\n-    \r\n+\r\n+    <script>\r\n+        document.addEventListener(\"deviceready\", onDeviceReady, false);\r\n+\r\n+        function onDeviceReady() {\r\n+            document.addEventListener(\"backbutton\", function(e) {\r\n+                if ($.mobile.activePage.is('#page')) {\r\n+                    e.preventDefault();\r\n+                    ExitFromApp();\r\n+                } else {\r\n+                    navigator.app.backHistory()\r\n+                }\r\n+            }, false);\r\n+        }\r\n+        J.Cordova Plugins\r\n+        5. Audio\r\n+\r\n+        function ExitFromApp() {\r\n+            var x = confirm(\"Yakin keluar ?\");\r\n+            if (x == true) {\r\n+                navigator.app.exitApp();\r\n+                return true;\r\n+            } else {\r\n+                return false;\r\n+            }\r\n+        }\r\n+\r\n+        function playAudio(url) {\r\n+            var my_media = new Media(\"/android_asset/www/audio/mp3/BBM.mp3\",\r\n+                function() {\r\n+                    console.log(\"playAudio():Audio Success\");\r\n+                },\r\n+                function(err) {\r\n+                    console.log(\"playAudio():Audio Error: \" + err);\r\n+                }\r\n+            );\r\n+            my_media.play();\r\n+            var my_media = new Media(\"/android_asset/www/audio/mp3/akeh.mp3\",\r\n+                function() {\r\n+                    console.log(\"playAudio():Audio Success\");\r\n+                },\r\n+                function(err) {\r\n+                    console.log(\"playAudio():Audio Error: \" + err);\r\n+                }\r\n+            );\r\n+            my_media.play();\r\n+        }\r\n+    </script>\r\n+    </head>\r\n+\r\n+\r\n </body>\r\n+\r\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644417109907,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,10 +24,8 @@\n                     navigator.app.backHistory()\r\n                 }\r\n             }, false);\r\n         }\r\n-        J.Cordova Plugins\r\n-        5. Audio\r\n \r\n         function ExitFromApp() {\r\n             var x = confirm(\"Yakin keluar ?\");\r\n             if (x == true) {\r\n@@ -58,9 +56,8 @@\n             );\r\n             my_media.play();\r\n         }\r\n     </script>\r\n-    </head>\r\n \r\n \r\n </body>\r\n \r\n"
+                },
+                {
+                    "date": 1644417118328,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,11 @@\n </head>\r\n \r\n <body>\r\n \r\n-    <script>\r\n+    \r\n+\r\n+<script>\r\n         document.addEventListener(\"deviceready\", onDeviceReady, false);\r\n \r\n         function onDeviceReady() {\r\n             document.addEventListener(\"backbutton\", function(e) {\r\n@@ -56,9 +58,7 @@\n             );\r\n             my_media.play();\r\n         }\r\n     </script>\r\n-\r\n-\r\n </body>\r\n \r\n </html>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644417125044,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n <body>\r\n \r\n     \r\n \r\n-<script>\r\n+    <script>\r\n         document.addEventListener(\"deviceready\", onDeviceReady, false);\r\n \r\n         function onDeviceReady() {\r\n             document.addEventListener(\"backbutton\", function(e) {\r\n"
+                },
+                {
+                    "date": 1644417155198,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,24 @@\n </head>\r\n \r\n <body>\r\n \r\n+<div data-role=\"page\" id=\"index\">\r\n+<div data-theme=\"a\" data-role=\"header\" data-position=\"fixed\">\r\n+<h1 class=\"titlehome\">Audio</h1>\r\n+</div>\r\n+<div data-role=\"content\" id=\"content\">\r\n+<li><a href=\"#\" onclick=\"playAudio('soundbbm')\" data-icon=\"power\">Test Sound</a></li>\r\n+</div>\r\n+<div data-theme=\"a\" data-role=\"footer\" data-position=\"fixed\">\r\n+<div data-role=\"navbar\">\r\n+<ul> \r\n+<li><a href=\"#\" onclick=\"ExitFromApp()\" data-icon=\"power\">Exit</a></li>\r\n+</ul>\r\n+</div>\r\n+<h1>setijo@gmail.com</h1>\r\n+</div>\r\n+</div>\r\n     \r\n \r\n     <script>\r\n         document.addEventListener(\"deviceready\", onDeviceReady, false);\r\n"
+                },
+                {
+                    "date": 1644417188053,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,26 +11,26 @@\n </head>\r\n \r\n <body>\r\n \r\n-<div data-role=\"page\" id=\"index\">\r\n-<div data-theme=\"a\" data-role=\"header\" data-position=\"fixed\">\r\n-<h1 class=\"titlehome\">Audio</h1>\r\n-</div>\r\n-<div data-role=\"content\" id=\"content\">\r\n-<li><a href=\"#\" onclick=\"playAudio('soundbbm')\" data-icon=\"power\">Test Sound</a></li>\r\n-</div>\r\n-<div data-theme=\"a\" data-role=\"footer\" data-position=\"fixed\">\r\n-<div data-role=\"navbar\">\r\n-<ul> \r\n-<li><a href=\"#\" onclick=\"ExitFromApp()\" data-icon=\"power\">Exit</a></li>\r\n-</ul>\r\n-</div>\r\n-<h1>setijo@gmail.com</h1>\r\n-</div>\r\n-</div>\r\n-    \r\n+    <div data-role=\"page\" id=\"index\">\r\n+        <div data-theme=\"a\" data-role=\"header\" data-position=\"fixed\">\r\n+            <h1 class=\"titlehome\">Audio</h1>\r\n+        </div>\r\n+        <div data-role=\"content\" id=\"content\">\r\n+            <li><a href=\"#\" onclick=\"playAudio('soundbbm')\" data-icon=\"power\">Test Sound</a></li>\r\n+        </div>\r\n+        <div data-theme=\"a\" data-role=\"footer\" data-position=\"fixed\">\r\n+            <div data-role=\"navbar\">\r\n+                <ul>\r\n+                    <li><a href=\"#\" onclick=\"ExitFromApp()\" data-icon=\"power\">Exit</a></li>\r\n+                </ul>\r\n+            </div>\r\n+            <h1>setijo@gmail.com</h1>\r\n+        </div>\r\n+    </div>\r\n \r\n+\r\n     <script>\r\n         document.addEventListener(\"deviceready\", onDeviceReady, false);\r\n \r\n         function onDeviceReady() {\r\n@@ -63,17 +63,17 @@\n                     console.log(\"playAudio():Audio Error: \" + err);\r\n                 }\r\n             );\r\n             my_media.play();\r\n-            var my_media = new Media(\"/android_asset/www/audio/mp3/akeh.mp3\",\r\n-                function() {\r\n-                    console.log(\"playAudio():Audio Success\");\r\n-                },\r\n-                function(err) {\r\n-                    console.log(\"playAudio():Audio Error: \" + err);\r\n-                }\r\n-            );\r\n-            my_media.play();\r\n+            // var my_media = new Media(\"/android_asset/www/audio/mp3/akeh.mp3\",\r\n+            //     function() {\r\n+            //         console.log(\"playAudio():Audio Success\");\r\n+            //     },\r\n+            //     function(err) {\r\n+            //         console.log(\"playAudio():Audio Error: \" + err);\r\n+            //     }\r\n+            // );\r\n+            // my_media.play();\r\n         }\r\n     </script>\r\n </body>\r\n \r\n"
+                },
+                {
+                    "date": 1644417325936,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n             }\r\n         }\r\n \r\n         function playAudio(url) {\r\n-            var my_media = new Media(\"/android_asset/www/audio/mp3/BBM.mp3\",\r\n+            var my_media = new Media(\"/android_asset/www/audio/mp3/Yoru-ni-kakeru-(osanime.com).mp3\",\r\n                 function() {\r\n                     console.log(\"playAudio():Audio Success\");\r\n                 },\r\n                 function(err) {\r\n"
+                }
+            ],
+            "date": 1644417014487,
+            "name": "Commit-0",
+            "content": "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Document</title>\r\n</head>\r\n<body>\r\n    \r\n</body>\r\n</html>"
+        }
+    ]
+}
