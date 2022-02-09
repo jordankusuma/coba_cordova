@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title></title>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script>
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(
+          /[?&]+([^=&]+)=([^&]*)/gi,
+          function (m, key, value) {
+            vars[key] = value;
+          }
+        );
+        return vars;
+      }
+      var id = getUrlVars()["id"];
+      $("document").ready(function () {
+        $.getJSON(
+          "http://localhost/Infodb/www/info5/mahasiswa_delete.php?id=" +
+            id,
+          { get_param: "value" },
+          function (data) {}
+        );
+        alert("Sukses Delete");
+        window.location.href = "data_karyawan.html";
+      });
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <title></title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <style>
+      .loading {
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        left: 45%;
+        top: 50%;
+        margin: -40px 0 0 -30px;
+      }
+    </style>
+    <script>
+      $("document").ready(function() {
+        $("#login").submit(function(){
+            $.post('http://localhost/Infodb/www/info5/login_mahasiswa.php', $(this).serialize(), function(data){
+            if(data == 1){
+                var db =window.openDatabase("login","1.0","Login",10000);
+                db.transaction(insertData,OnError,OnSuccess);
+            
+                function insertData(tx) {
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS memberlogin (idmember INTEGER PRIMARY KEY, username VARCHAR, status VARCHAR)');
+                    var username = $("#username").val();
+                    var password = $("#password").val();
+                    tx.executeSql('INSERT INTO memberlogin VALUES (null,"'+ username +'",1,"'+ password +'")');
+                }
+
+                function OnSuccess(){
+                    setTimeout(function(){
+                        $('#response').hide();
+                        alert('sukses login');
+                        window.location.href='data_karyawan.html';
+                    },3000);
+                }
+
+                function OnError(tx,err) {
+                    alert('error'+err);
+                }
+            } else{
+                setTimeout(function(){
+                    $('#response').hide();
+                    alert('gagal login');
+                    return false;
+                },3000);
+            }}).fail(function(){
+                alert("failed");
+            });
+        return false;
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div data-role="page" id="home">
+      <div data-role="header" id="myheader">
+        <h1 class="titlelogin">LOGIN</h1>
+      </div>
+      <div role="main" class="ui-content">
+        <div id="response"></div>
+        <form id="login">
+          <input type="hidden" name="id" id="id" />
+          <label>Username : </label>
+          <input type="text" name="username" id="username" />
+          <label>Password :</label>
+          <input type="password" name="password" id="password"/>
+          <input type="submit" value="submit" name="submit" />
+        </form>
+      </div>
+      <div data-role="footer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <title></title>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="home">
+      <div data-role="header" id="myheader">
+        <a href="#" onclick="back()" data-icon="arrow-l">Back</a>
+        <h1 class="titlehome">Home</h1>
+      </div>
+      <div role="main" class="ui-content">
+        <h3>Data Karyawan</h3>
+        <div id="data"></div>
+      </div>
+      <div data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#menu" data-icon="bars">Menu</a></li>
+            <li><a href="#" data-icon="home">Test</a></li>
+            <li><a href="#" data-icon="gear">Setting</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(
+          /[?&]+([^=&]+)=([^&]*)/gi,
+          function (m, key, value) {
+            vars[key] = value;
+          }
+        );
+        return vars;
+      }
+
+      var id = getUrlVars()["id"];
+      var x = getUrlVars()["x"];
+
+      function back() {
+        window.location.href = "data_karyawan.html";
+      }
+
+      function hapus(id) {
+        window.location.href = "data_karyawan_delete.html?id=" + id;
+      }
+
+      $("document").ready(function () {
+        $.getJSON(
+          "http://localhost/Infodb/www/info5/mahasiswa_detail.php?id=" +
+            id,
+          { get_param: "value" },
+          function (data) {
+            $.each(data, function (index, element) {
+              $("#data").append(
+                  "NAMA : " +
+                  element.nama +
+                  "<br>NRP : " +
+                  element.nrp +
+                  "<br>JURUSAN : " +
+                  element.jurusan +
+                  '<br> <a href="#" onclick="hapus(\'' +
+                  element.id +
+                  "')\">Delete</a> "
+              );
+            });
+          }
+        );
+      });
+    </script>
+  </body>
+</html>

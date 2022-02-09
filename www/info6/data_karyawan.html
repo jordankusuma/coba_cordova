@@ -1,0 +1,54 @@
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+    <div data-role="page" id="home">
+        <div data-role="header" id="myheader">
+            <a href="#" data-icon="home">Test</a>
+            <h1 class="titlehome"> Home </h1>
+            <a href="#" data-icon="delete" onclick="logout()">Logout</a> 
+        </div>
+    
+        <div role="main" class="ui-content">
+            <h3> Data Karyawan </h3> 
+            <button class="ui-btn ui-btn-inline ui-mini ui-icon-refresh ui-btn-icon-left" onclick="reload()"> Reload </button>
+            <br><br> 
+            <ul data-role='listview' id='data'><!--data disini--></ul>
+        </div>
+    
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li> <a href="#menu" data-icon="bars">Menu</a> </li>
+                    <li> <a href="#" data-icon="home">Test</a> </li>
+                    <li> <a href="#" data-icon="gear">Setting</a> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="logout.js"></script>
+    <script> 
+        function reload() {
+            window.location.href="data_karyawan.html"; 
+        }
+        function detail(id) {
+            window.location.href="data_karyawan_detail.html?id="+id;
+        }
+
+        $("document").ready(function() {
+            $.getJSON('http://localhost/Infodb/www/info5/mahasiswa_json.php', { get_param:'value' }, function(data) { 
+                $.each(data, function(index, element) {
+                    $('#data').append(
+                    '<li class="ui-first-child"> <a href="#" onclick="detail(\'' + element.id + '\')" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> '+ 
+                    element.nama +' </a> </li>');
+                }); 
+            });
+        });
+    </script>
+</body>
+</html
