@@ -1,0 +1,114 @@
+{
+    "sourceFile": "www/info9/users.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 24,
+            "patches": [
+                {
+                    "date": 1644487150190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1644487161076,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n <?php\r\n \r\n require_once \"connect.php\";\r\n \r\n+header(\"Access-Control-Allow-Origin: *\");\r\n+header(\"Access-Control-Allow-Methods: POST\");\r\n"
+                },
+                {
+                    "date": 1644487182373,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,7 @@\n \r\n require_once \"connect.php\";\r\n \r\n header(\"Access-Control-Allow-Origin: *\");\r\n-header(\"Access-Control-Allow-Methods: POST\");\r\n+header(\"Access-Control-Allow-Methods: GET\");\r\n+\r\n+$bearer_token = get_bearer_token();\r\n"
+                },
+                {
+                    "date": 1644487197483,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,4 +5,7 @@\n header(\"Access-Control-Allow-Origin: *\");\r\n header(\"Access-Control-Allow-Methods: GET\");\r\n \r\n $bearer_token = get_bearer_token();\r\n+#echo $bearer_token;\r\n+\r\n+\r\n"
+                },
+                {
+                    "date": 1644487215532,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,6 +6,6 @@\n header(\"Access-Control-Allow-Methods: GET\");\r\n \r\n $bearer_token = get_bearer_token();\r\n #echo $bearer_token;\r\n+$is_jwt_valid = is_jwt_valid\r\n \r\n-\r\n"
+                },
+                {
+                    "date": 1644487222616,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,6 +6,6 @@\n header(\"Access-Control-Allow-Methods: GET\");\r\n \r\n $bearer_token = get_bearer_token();\r\n #echo $bearer_token;\r\n-$is_jwt_valid = is_jwt_valid\r\n+$is_jwt_valid = is_jwt_valid($bearer_token);\r\n \r\n"
+                },
+                {
+                    "date": 1644487234559,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,4 +8,8 @@\n $bearer_token = get_bearer_token();\r\n #echo $bearer_token;\r\n $is_jwt_valid = is_jwt_valid($bearer_token);\r\n \r\n+if ($is_jwt_valid) {\r\n+    \r\n+}\r\n+\r\n"
+                },
+                {
+                    "date": 1644487247640,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,7 +9,8 @@\n #echo $bearer_token;\r\n $is_jwt_valid = is_jwt_valid($bearer_token);\r\n \r\n if ($is_jwt_valid) {\r\n+    $sql = \"SELECT * FROM user\";\r\n     \r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1644487263620,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,7 +10,9 @@\n $is_jwt_valid = is_jwt_valid($bearer_token);\r\n \r\n if ($is_jwt_valid) {\r\n     $sql = \"SELECT * FROM user\";\r\n+    $results = mysqli_query($conn, $sql);\r\n+\r\n     \r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1644487303566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,11 @@\n \r\n if ($is_jwt_valid) {\r\n     $sql = \"SELECT * FROM user\";\r\n     $results = mysqli_query($conn, $sql);\r\n+    $rows = array();\r\n \r\n-    \r\n+    while ($row = mysqli_fetch_assoc($results)) {\r\n+        \r\n+    }\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1644487312323,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,8 @@\n     $results = mysqli_query($conn, $sql);\r\n     $rows = array();\r\n \r\n     while ($row = mysqli_fetch_assoc($results)) {\r\n-        \r\n+        $rows[] = $row;\r\n     }\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1644487327645,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,6 +16,7 @@\n \r\n     while ($row = mysqli_fetch_assoc($results)) {\r\n         $rows[] = $row;\r\n     }\r\n+    echo json_encode($rows);\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1644487342467,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,6 +17,8 @@\n     while ($row = mysqli_fetch_assoc($results)) {\r\n         $rows[] = $row;\r\n     }\r\n     echo json_encode($rows);\r\n+} else {\r\n+    echo json_encode(array('error' => 'invalid error'));\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1644487352634,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,7 +18,7 @@\n         $rows[] = $row;\r\n     }\r\n     echo json_encode($rows);\r\n } else {\r\n-    echo json_encode(array('error' => 'invalid error'));\r\n+    echo json_encode(array('error' => 'Access Denied'));\r\n }\r\n \r\n"
+                },
+                {
+                    "date": 1644487414340,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,19 @@\n \r\n header(\"Access-Control-Allow-Origin: *\");\r\n header(\"Access-Control-Allow-Methods: GET\");\r\n \r\n+function getBearerToken() {\r\n+    $headers = $this->getAuthorizationHeader();\r\n+    // HEADER: Get the access token from the header\r\n+    if (!empty($headers)) {\r\n+        if (preg_match('/Bearer\\s(\\S+)/', $headers, $matches)) {\r\n+            return $matches[1];\r\n+        }\r\n+    }\r\n+    return null;\r\n+}\r\n+\r\n $bearer_token = get_bearer_token();\r\n #echo $bearer_token;\r\n $is_jwt_valid = is_jwt_valid($bearer_token);\r\n \r\n"
+                },
+                {
+                    "date": 1644487475541,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,43 @@\n \r\n header(\"Access-Control-Allow-Origin: *\");\r\n header(\"Access-Control-Allow-Methods: GET\");\r\n \r\n+function getAuthorizationHeader(){\r\n+    $headers = null;\r\n+    if (isset($_SERVER['Authorization'])) {\r\n+        $headers = trim($_SERVER[\"Authorization\"]);\r\n+    }\r\n+    else if (isset($_SERVER['HTTP_AUTHORIZATION'])) { //Nginx or fast CGI\r\n+        $headers = trim($_SERVER[\"HTTP_AUTHORIZATION\"]);\r\n+    } elseif (function_exists('apache_request_headers')) {\r\n+        $requestHeaders = apache_request_headers();\r\n+        // Server-side fix for bug in old Android versions (a nice side-effect of this fix means we don't care about capitalization for Authorization)\r\n+        $requestHeaders = array_combine(array_map('ucwords', array_keys($requestHeaders)), array_values($requestHeaders));\r\n+        //print_r($requestHeaders);\r\n+        if (isset($requestHeaders['Authorization'])) {\r\n+            $headers = trim($requestHeaders['Authorization']);\r\n+        }\r\n+    }\r\n+    return $headers;\r\n+}\r\n+\r\n+/**\r\n+ * get access token from header\r\n+ * */\r\n function getBearerToken() {\r\n+    $headers = getAuthorizationHeader();\r\n+    // HEADER: Get the access token from the header\r\n+    if (!empty($headers)) {\r\n+        if (preg_match('/Bearer\\s(\\S+)/', $headers, $matches)) {\r\n+            return $matches[1];\r\n+        }\r\n+    }\r\n+    return null;\r\n+}\r\n+\r\n+\r\n+function getBearerToken() {\r\n     $headers = $this->getAuthorizationHeader();\r\n     // HEADER: Get the access token from the header\r\n     if (!empty($headers)) {\r\n         if (preg_match('/Bearer\\s(\\S+)/', $headers, $matches)) {\r\n"
+                },
+                {
+                    "date": 1644487496267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,21 +37,9 @@\n     }\r\n     return null;\r\n }\r\n \r\n-\r\n-function getBearerToken() {\r\n-    $headers = $this->getAuthorizationHeader();\r\n-    // HEADER: Get the access token from the header\r\n-    if (!empty($headers)) {\r\n-        if (preg_match('/Bearer\\s(\\S+)/', $headers, $matches)) {\r\n-            return $matches[1];\r\n-        }\r\n-    }\r\n-    return null;\r\n-}\r\n-\r\n-$bearer_token = get_bearer_token();\r\n+$bearer_token = getBearerToken();\r\n #echo $bearer_token;\r\n $is_jwt_valid = is_jwt_valid($bearer_token);\r\n \r\n if ($is_jwt_valid) {\r\n"
+                },
+                {
+                    "date": 1644488255317,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,8 +37,35 @@\n     }\r\n     return null;\r\n }\r\n \r\n+function is_jwt_valid($jwt, $secret = 'secret') {\r\n+\t// split the jwt\r\n+\t$tokenParts = explode('.', $jwt);\r\n+\t$header = base64_decode($tokenParts[0]);\r\n+\t$payload = base64_decode($tokenParts[1]);\r\n+\t$signature_provided = $tokenParts[2];\r\n+\r\n+\t// check the expiration time - note this will cause an error if there is no 'exp' claim in the jwt\r\n+\t$expiration = json_decode($payload)->exp;\r\n+\t$is_token_expired = ($expiration - time()) < 0;\r\n+\r\n+\t// build a signature based on the header and payload using the secret\r\n+\t$base64_url_header = base64url_encode($header);\r\n+\t$base64_url_payload = base64url_encode($payload);\r\n+\t$signature = hash_hmac('SHA256', $base64_url_header . \".\" . $base64_url_payload, $secret, true);\r\n+\t$base64_url_signature = base64url_encode($signature);\r\n+\r\n+\t// verify it matches the signature provided in the jwt\r\n+\t$is_signature_valid = ($base64_url_signature === $signature_provided);\r\n+\t\r\n+\tif ($is_token_expired || !$is_signature_valid) {\r\n+\t\treturn FALSE;\r\n+\t} else {\r\n+\t\treturn TRUE;\r\n+\t}\r\n+}\r\n+\r\n $bearer_token = getBearerToken();\r\n #echo $bearer_token;\r\n $is_jwt_valid = is_jwt_valid($bearer_token);\r\n \r\n"
+                },
+                {
+                    "date": 1644488414995,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,8 +37,12 @@\n     }\r\n     return null;\r\n }\r\n \r\n+function base64url_encode($str) {\r\n+    return rtrim(strtr(base64_encode($str), '+/', '-_'), '=');\r\n+}\r\n+\r\n function is_jwt_valid($jwt, $secret = 'secret') {\r\n \t// split the jwt\r\n \t$tokenParts = explode('.', $jwt);\r\n \t$header = base64_decode($tokenParts[0]);\r\n"
+                },
+                {
+                    "date": 1644488442013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,9 +69,9 @@\n \t}\r\n }\r\n \r\n $bearer_token = getBearerToken();\r\n-#echo $bearer_token;\r\n+echo $bearer_token;\r\n $is_jwt_valid = is_jwt_valid($bearer_token);\r\n \r\n if ($is_jwt_valid) {\r\n     $sql = \"SELECT * FROM user\";\r\n"
+                },
+                {
+                    "date": 1644488473243,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -71,9 +71,9 @@\n \r\n $bearer_token = getBearerToken();\r\n echo $bearer_token;\r\n $is_jwt_valid = is_jwt_valid($bearer_token);\r\n-\r\n+echo $is_jwt_valid;\r\n if ($is_jwt_valid) {\r\n     $sql = \"SELECT * FROM user\";\r\n     $results = mysqli_query($conn, $sql);\r\n     $rows = array();\r\n"
+                },
+                {
+                    "date": 1644488483885,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,9 +69,9 @@\n \t}\r\n }\r\n \r\n $bearer_token = getBearerToken();\r\n-echo $bearer_token;\r\n+//echo $bearer_token;\r\n $is_jwt_valid = is_jwt_valid($bearer_token);\r\n echo $is_jwt_valid;\r\n if ($is_jwt_valid) {\r\n     $sql = \"SELECT * FROM user\";\r\n"
+                },
+                {
+                    "date": 1644488507489,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,18 +62,19 @@\n \t// verify it matches the signature provided in the jwt\r\n \t$is_signature_valid = ($base64_url_signature === $signature_provided);\r\n \t\r\n \tif ($is_token_expired || !$is_signature_valid) {\r\n-\t\treturn FALSE;\r\n+\t\treturn false;\r\n \t} else {\r\n-\t\treturn TRUE;\r\n+\t\treturn true;\r\n \t}\r\n }\r\n \r\n $bearer_token = getBearerToken();\r\n //echo $bearer_token;\r\n $is_jwt_valid = is_jwt_valid($bearer_token);\r\n echo $is_jwt_valid;\r\n+\r\n if ($is_jwt_valid) {\r\n     $sql = \"SELECT * FROM user\";\r\n     $results = mysqli_query($conn, $sql);\r\n     $rows = array();\r\n"
+                },
+                {
+                    "date": 1644488613092,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -71,9 +71,9 @@\n \r\n $bearer_token = getBearerToken();\r\n //echo $bearer_token;\r\n $is_jwt_valid = is_jwt_valid($bearer_token);\r\n-echo $is_jwt_valid;\r\n+var_dump($is_jwt_valid;\r\n \r\n if ($is_jwt_valid) {\r\n     $sql = \"SELECT * FROM user\";\r\n     $results = mysqli_query($conn, $sql);\r\n"
+                },
+                {
+                    "date": 1644488657298,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -71,9 +71,8 @@\n \r\n $bearer_token = getBearerToken();\r\n //echo $bearer_token;\r\n $is_jwt_valid = is_jwt_valid($bearer_token);\r\n-var_dump($is_jwt_valid;\r\n \r\n if ($is_jwt_valid) {\r\n     $sql = \"SELECT * FROM user\";\r\n     $results = mysqli_query($conn, $sql);\r\n"
+                }
+            ],
+            "date": 1644487150190,
+            "name": "Commit-0",
+            "content": "<?php\r\n\r\nrequire_once \"connect.php\";\r\n\r\n"
+        }
+    ]
+}

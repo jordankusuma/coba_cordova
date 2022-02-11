@@ -1,0 +1,22 @@
+{
+    "sourceFile": "platforms/android/app/src/main/res/xml/config.xml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1644417834425,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1644417843084,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n   </description>\n     <author email=\"dev@cordova.apache.org\" href=\"http://cordova.io\">\n       Apache Cordova Team\n   </author>\n-    <content src=\"info8/index.html\" />\n+    <content src=\"info8/audio.php\" />\n     <access origin=\"*\" />\n     <allow-intent href=\"http://*/*\" />\n     <allow-intent href=\"https://*/*\" />\n     <allow-intent href=\"tel:*\" />\n"
+                }
+            ],
+            "date": 1644417834425,
+            "name": "Commit-0",
+            "content": "<?xml version='1.0' encoding='utf-8'?>\n<widget id=\"io.cordova.hellocordova\" version=\"0.0.1\" xmlns=\"http://www.w3.org/ns/widgets\" xmlns:cdv=\"http://cordova.apache.org/ns/1.0\">\n    <feature name=\"BackbuttonPlugin\">\n        <param name=\"android-package\" value=\"com.badrit.Backbutton.BackbuttonPlugin\" />\n    </feature>\n    <feature name=\"Camera\">\n        <param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" />\n    </feature>\n    <feature name=\"File\">\n        <param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" />\n        <param name=\"onload\" value=\"true\" />\n    </feature>\n    <allow-navigation href=\"cdvfile:*\" />\n    <feature name=\"FileTransfer\">\n        <param name=\"android-package\" value=\"org.apache.cordova.filetransfer.FileTransfer\" />\n    </feature>\n    <feature name=\"Media\">\n        <param name=\"android-package\" value=\"org.apache.cordova.media.AudioHandler\" />\n    </feature>\n    <name>HelloCordova</name>\n    <description>\n      A sample Apache Cordova application that responds to the deviceready event.\n  </description>\n    <author email=\"dev@cordova.apache.org\" href=\"http://cordova.io\">\n      Apache Cordova Team\n  </author>\n    <content src=\"info8/index.html\" />\n    <access origin=\"*\" />\n    <allow-intent href=\"http://*/*\" />\n    <allow-intent href=\"https://*/*\" />\n    <allow-intent href=\"tel:*\" />\n    <allow-intent href=\"sms:*\" />\n    <allow-intent href=\"mailto:*\" />\n    <allow-intent href=\"geo:*\" />\n    <allow-intent href=\"market:*\" />\n    <preference name=\"loglevel\" value=\"DEBUG\" />\n</widget>\n"
+        }
+    ]
+}

@@ -1,0 +1,126 @@
+{
+    "sourceFile": "www/info9/api.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 27,
+            "patches": [
+                {
+                    "date": 1644482538387,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1644482551770,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,7 @@\n <?php \r\n \r\n+require_once \"connect.php\";\r\n \r\n+\r\n+\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482569920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n <?php \r\n \r\n require_once \"connect.php\";\r\n \r\n+if (function_exists($_GET['function']))\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482575281,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,10 @@\n <?php \r\n \r\n require_once \"connect.php\";\r\n \r\n-if (function_exists($_GET['function']))\r\n+if (function_exists($_GET['function'])) {\r\n+    \r\n+}\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482587767,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \r\n require_once \"connect.php\";\r\n \r\n if (function_exists($_GET['function'])) {\r\n-    \r\n+    $_GET['function']();\r\n }\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482594155,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,5 +6,7 @@\n     $_GET['function']();\r\n }\r\n \r\n \r\n+\r\n+\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482604019,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,10 @@\n if (function_exists($_GET['function'])) {\r\n     $_GET['function']();\r\n }\r\n \r\n+function get_karyawan() {\r\n+    \r\n+}\r\n \r\n \r\n-\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482610322,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n     $_GET['function']();\r\n }\r\n \r\n function get_karyawan() {\r\n+    global $connect;\r\n     \r\n }\r\n \r\n \r\n"
+                },
+                {
+                    "date": 1644482625239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n }\r\n \r\n function get_karyawan() {\r\n     global $connect;\r\n-    \r\n+    $query = $connect->query(\"SELECT * \")\r\n }\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482635301,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,10 @@\n }\r\n \r\n function get_karyawan() {\r\n     global $connect;\r\n-    $query = $connect->query(\"SELECT * \")\r\n+    $query = $connect->query(\"SELECT * from karyawan\");\r\n+    \r\n }\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482652205,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,12 @@\n \r\n function get_karyawan() {\r\n     global $connect;\r\n     $query = $connect->query(\"SELECT * from karyawan\");\r\n-    \r\n+\r\n+    while ($row = mysqli_fetch_assoc($query)) {\r\n+        \r\n+    }\r\n }\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482662239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,10 +9,10 @@\n function get_karyawan() {\r\n     global $connect;\r\n     $query = $connect->query(\"SELECT * from karyawan\");\r\n \r\n-    while ($row = mysqli_fetch_assoc($query)) {\r\n-        \r\n+    while ($row = mysqli_fetch_object($query)) {\r\n+\r\n     }\r\n }\r\n \r\n \r\n"
+                },
+                {
+                    "date": 1644482671513,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,12 @@\n     global $connect;\r\n     $query = $connect->query(\"SELECT * from karyawan\");\r\n \r\n     while ($row = mysqli_fetch_object($query)) {\r\n+        $data[] = $row;\r\n+    }\r\n \r\n-    }\r\n+    \r\n }\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482684882,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,11 @@\n     while ($row = mysqli_fetch_object($query)) {\r\n         $data[] = $row;\r\n     }\r\n \r\n-    \r\n+    $response = array(\r\n+        \r\n+    )\r\n }\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482716345,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,10 +14,14 @@\n         $data[] = $row;\r\n     }\r\n \r\n     $response = array(\r\n-        \r\n-    )\r\n+        'status' => 1,\r\n+        'message' => 'Success',\r\n+        'data' => $data\r\n+    );\r\n+\r\n+    \r\n }\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482734735,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n         'message' => 'Success',\r\n         'data' => $data\r\n     );\r\n \r\n-    \r\n+    header()\r\n }\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482758547,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n         'message' => 'Success',\r\n         'data' => $data\r\n     );\r\n \r\n-    header()\r\n+    header('Content-Type: application/json');\r\n }\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482769259,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,9 @@\n         'data' => $data\r\n     );\r\n \r\n     header('Content-Type: application/json');\r\n+    echo json_encode($response);\r\n }\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482801108,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,6 +23,10 @@\n     header('Content-Type: application/json');\r\n     echo json_encode($response);\r\n }\r\n \r\n+function get_karyawan_id() {\r\n+    \r\n+}\r\n \r\n+\r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482808629,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n     echo json_encode($response);\r\n }\r\n \r\n function get_karyawan_id() {\r\n-    \r\n+    global $connect;\r\n }\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482822041,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n     $_GET['function']();\r\n }\r\n \r\n function get_karyawan() {\r\n-    global $connect;\r\n+    global $conn;\r\n     $query = $connect->query(\"SELECT * from karyawan\");\r\n \r\n     while ($row = mysqli_fetch_object($query)) {\r\n         $data[] = $row;\r\n"
+                },
+                {
+                    "date": 1644482849722,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n }\r\n \r\n function get_karyawan() {\r\n     global $conn;\r\n-    $query = $connect->query(\"SELECT * from karyawan\");\r\n+    $query = $conn->query(\"SELECT * from karyawan\");\r\n \r\n     while ($row = mysqli_fetch_object($query)) {\r\n         $data[] = $row;\r\n     }\r\n@@ -24,9 +24,13 @@\n     echo json_encode($response);\r\n }\r\n \r\n function get_karyawan_id() {\r\n-    global $connect;\r\n+    global $conn;\r\n+\r\n+    if (!empty($_GET[\"id\"])) {\r\n+        \r\n+    }\r\n }\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482934415,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n function get_karyawan_id() {\r\n     global $conn;\r\n \r\n     if (!empty($_GET[\"id\"])) {\r\n-        \r\n+        $id = $_GET[\"id\"]\r\n     }\r\n }\r\n \r\n \r\n"
+                },
+                {
+                    "date": 1644482941964,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,10 +27,25 @@\n function get_karyawan_id() {\r\n     global $conn;\r\n \r\n     if (!empty($_GET[\"id\"])) {\r\n-        $id = $_GET[\"id\"]\r\n+        $id = $_GET[\"id\"];\r\n     }\r\n+\r\n+    $query = $conn->query(\"SELECT * from karyawan\");\r\n+\r\n+    while ($row = mysqli_fetch_object($query)) {\r\n+        $data[] = $row;\r\n+    }\r\n+\r\n+    $response = array(\r\n+        'status' => 1,\r\n+        'message' => 'Success',\r\n+        'data' => $data\r\n+    );\r\n+\r\n+    header('Content-Type: application/json');\r\n+    echo json_encode($response);\r\n }\r\n \r\n \r\n ?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482959361,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n     if (!empty($_GET[\"id\"])) {\r\n         $id = $_GET[\"id\"];\r\n     }\r\n \r\n-    $query = $conn->query(\"SELECT * from karyawan\");\r\n+    $query = $conn->query(\"SELECT * from karyawan where id=$id\");\r\n \r\n     while ($row = mysqli_fetch_object($query)) {\r\n         $data[] = $row;\r\n     }\r\n"
+                },
+                {
+                    "date": 1644482983719,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,8 +36,22 @@\n     while ($row = mysqli_fetch_object($query)) {\r\n         $data[] = $row;\r\n     }\r\n \r\n+    if($data)\r\n+{\r\n+$response = array(\r\n+'status' => 1,\r\n+'message' =>'Success',\r\n+'data' => $data\r\n+);\r\n+}else {\r\n+$response=array(\r\n+'status' => 0,\r\n+'message' =>'No Data Found'\r\n+);\r\n+}\r\n+\r\n     $response = array(\r\n         'status' => 1,\r\n         'message' => 'Success',\r\n         'data' => $data\r\n"
+                },
+                {
+                    "date": 1644482990036,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,14 @@\n-<?php \r\n+<?php\r\n \r\n require_once \"connect.php\";\r\n \r\n if (function_exists($_GET['function'])) {\r\n     $_GET['function']();\r\n }\r\n \r\n-function get_karyawan() {\r\n+function get_karyawan()\r\n+{\r\n     global $conn;\r\n     $query = $conn->query(\"SELECT * from karyawan\");\r\n \r\n     while ($row = mysqli_fetch_object($query)) {\r\n@@ -23,9 +24,10 @@\n     header('Content-Type: application/json');\r\n     echo json_encode($response);\r\n }\r\n \r\n-function get_karyawan_id() {\r\n+function get_karyawan_id()\r\n+{\r\n     global $conn;\r\n \r\n     if (!empty($_GET[\"id\"])) {\r\n         $id = $_GET[\"id\"];\r\n@@ -36,21 +38,20 @@\n     while ($row = mysqli_fetch_object($query)) {\r\n         $data[] = $row;\r\n     }\r\n \r\n-    if($data)\r\n-{\r\n-$response = array(\r\n-'status' => 1,\r\n-'message' =>'Success',\r\n-'data' => $data\r\n-);\r\n-}else {\r\n-$response=array(\r\n-'status' => 0,\r\n-'message' =>'No Data Found'\r\n-);\r\n-}\r\n+    if ($data) {\r\n+        $response = array(\r\n+            'status' => 1,\r\n+            'message' => 'Success',\r\n+            'data' => $data\r\n+        );\r\n+    } else {\r\n+        $response = array(\r\n+            'status' => 0,\r\n+            'message' => 'No Data Found'\r\n+        );\r\n+    }\r\n \r\n     $response = array(\r\n         'status' => 1,\r\n         'message' => 'Success',\r\n@@ -59,7 +60,4 @@\n \r\n     header('Content-Type: application/json');\r\n     echo json_encode($response);\r\n }\r\n-\r\n-\r\n-?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1644482997447,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,7 +50,8 @@\n             'status' => 0,\r\n             'message' => 'No Data Found'\r\n         );\r\n     }\r\n+    \r\n     header('Content-Type: application/json');\r\n     echo json_encode($response);\r\n }\r\n"
+                }
+            ],
+            "date": 1644482538387,
+            "name": "Commit-0",
+            "content": "<?php \r\n\r\n\r\n?>"
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "sourceFile": "www/info9/register.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1644488910115,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1644488918662,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,18 +3,18 @@\n /**\r\n * Author : https://roytuts.com\r\n */\r\n \r\n-require_once 'conn.php';\r\n+require_once 'connect.php';\r\n \r\n header(\"Access-Control-Allow-Origin: *\");\r\n header(\"Access-Control-Allow-Methods: POST\");\r\n \r\n if ($_SERVER['REQUEST_METHOD'] === 'POST') {\r\n     // get posted data\r\n     $data = json_decode(file_get_contents(\"php://input\", true));\r\n     \r\n-    $sql = \"INSERT INTO user(username, password) VALUES('\" . mysqli_real_escape_string($connect, $data->username) . \"', '\" . mysqli_real_escape_string($connect, $data->password) . \"')\";\r\n+    $sql = \"INSERT INTO user(username, password) VALUES('\" . mysqli_real_escape_string($conn, $data->username) . \"', '\" . mysqli_real_escape_string($connect, $data->password) . \"')\";\r\n     \r\n     $result = mysqli_query($connect, $sql);\r\n     \r\n     if($result) {\r\n"
+                },
+                {
+                    "date": 1644488925505,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n if ($_SERVER['REQUEST_METHOD'] === 'POST') {\r\n     // get posted data\r\n     $data = json_decode(file_get_contents(\"php://input\", true));\r\n     \r\n-    $sql = \"INSERT INTO user(username, password) VALUES('\" . mysqli_real_escape_string($conn, $data->username) . \"', '\" . mysqli_real_escape_string($connect, $data->password) . \"')\";\r\n+    $sql = \"INSERT INTO user(username, password) VALUES('\" . mysqli_real_escape_string($conn, $data->username) . \"', '\" . mysqli_real_escape_string($conn, $data->password) . \"')\";\r\n     \r\n     $result = mysqli_query($connect, $sql);\r\n     \r\n     if($result) {\r\n"
+                }
+            ],
+            "date": 1644488910115,
+            "name": "Commit-0",
+            "content": "<?php\r\n\r\n/**\r\n* Author : https://roytuts.com\r\n*/\r\n\r\nrequire_once 'conn.php';\r\n\r\nheader(\"Access-Control-Allow-Origin: *\");\r\nheader(\"Access-Control-Allow-Methods: POST\");\r\n\r\nif ($_SERVER['REQUEST_METHOD'] === 'POST') {\r\n    // get posted data\r\n    $data = json_decode(file_get_contents(\"php://input\", true));\r\n    \r\n    $sql = \"INSERT INTO user(username, password) VALUES('\" . mysqli_real_escape_string($connect, $data->username) . \"', '\" . mysqli_real_escape_string($connect, $data->password) . \"')\";\r\n    \r\n    $result = mysqli_query($connect, $sql);\r\n    \r\n    if($result) {\r\n        echo json_encode(array('success' => 'You registered successfully'));\r\n    } else {\r\n        echo json_encode(array('error' => 'Something went wrong, please contact administrator'));\r\n    }\r\n}\r\n\r\n?>"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "www/info9/connect.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1644484224175,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1644484224175,
+            "name": "Commit-0",
+            "content": "<?php\r\n\r\n$conn = mysqli_connect(\"localhost\", \"coba\", \"coba\", \"mahasiswa\");\r\n\r\nif (!$conn) {\r\n    die(\"Koneksi Tidak Berhasil: \" . mysqli_connect_error());\r\n}\r\n"
+        }
+    ]
+}
